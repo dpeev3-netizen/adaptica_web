@@ -22,6 +22,17 @@
     text-align: center;
 }
 
+.crm-step h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.85rem;
+}
+
+.crm-step p {
+    font-size: 0.88rem;
+    color: var(--muted-text);
+    line-height: 1.7;
+}
+
 .crm-step-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.82rem;
