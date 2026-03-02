@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4.5rem;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .crm-features {
