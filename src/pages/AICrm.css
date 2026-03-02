@@ -1,8 +1,63 @@
-.crm-value-grid {
+.crm-intro-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 4.5rem;
     align-items: center;
+}
+
+.crm-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Steps Grid */
+.crm-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.crm-step {
+    text-align: center;
+}
+
+.crm-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--primary-accent);
+    display: block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.crm-feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(192, 57, 43, 0.1);
+    color: var(--primary-accent);
+    margin-bottom: 1.25rem;
+}
+
+@media (max-width: 992px) {
+    .crm-intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crm-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .crm-steps {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* CRM Dashboard Mockup */
@@ -97,74 +152,6 @@
     text-transform: uppercase;
 }
 
-/* Features (dark) */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.feature-card {
-    padding: 2.5rem 2rem;
-    text-align: center;
-}
-
-.feature-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    background: rgba(192, 57, 43, 0.1);
-    border: 1px solid rgba(192, 57, 43, 0.15);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-accent);
-    margin-bottom: 1.5rem;
-}
-
-.feature-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem;
-}
-
-.feature-card p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-}
-
-/* Process steps */
-.process-steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-}
-
-.process-step {
-    text-align: center;
-    padding: 2.25rem 1.5rem;
-}
-
-.process-step-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--primary-accent);
-    display: block;
-    margin-bottom: 1rem;
-    letter-spacing: 0.1em;
-    opacity: 0.7;
-}
-
-.process-step h3 {
-    font-size: 1.15rem;
-    margin-bottom: 0.75rem;
-}
-
-.process-step p {
-    font-size: 0.88rem;
-    color: var(--muted-text);
-    line-height: 1.7;
-}
-
 /* Highlight items */
 .crm-highlights {
     display: flex;
@@ -183,18 +170,6 @@
 }
 
 @media (max-width: 768px) {
-    .crm-value-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .process-steps-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .crm-dash-content {
         grid-template-columns: 1fr;
     }
