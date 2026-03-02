@@ -1,13 +1,12 @@
 .crm-intro-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4.5rem;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
 }
 
 .crm-features {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
