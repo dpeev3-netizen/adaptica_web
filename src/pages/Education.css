@@ -1,0 +1,202 @@
+/* =========== PROCESS =========== */
+.edu-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.edu-process-card {
+    padding: 2.5rem 2rem;
+    position: relative;
+}
+
+.edu-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--primary-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1.25rem;
+}
+
+.edu-process-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin-bottom: 1.25rem;
+}
+
+.edu-process-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+
+.edu-process-card p {
+    font-size: 0.88rem;
+    color: var(--muted-text);
+    line-height: 1.75;
+}
+
+/* =========== CURRICULUM =========== */
+.curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.curriculum-card {
+    padding: 2.5rem 2rem;
+}
+
+.curriculum-day {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--primary-accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.curriculum-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    color: var(--light-text);
+}
+
+.curriculum-topics {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.curriculum-topics li {
+    font-size: 0.88rem;
+    color: var(--muted-dark);
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.curriculum-topics li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-accent);
+    opacity: 0.6;
+}
+
+/* =========== TOOLS =========== */
+.edu-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.edu-tool-card {
+    padding: 1.75rem 2rem;
+    position: relative;
+}
+
+.edu-tool-card h4 {
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.edu-tool-card p {
+    font-size: 0.85rem;
+    color: var(--muted-text);
+}
+
+/* =========== OUTCOMES =========== */
+.edu-outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* =========== FORMATS =========== */
+.formats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.format-card {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.format-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: #28c940;
+    background: rgba(40, 201, 64, 0.1);
+    border: 1px solid rgba(40, 201, 64, 0.2);
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+}
+
+.format-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--primary-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin: 0 auto 1.5rem;
+}
+
+.format-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.format-card p {
+    font-size: 0.92rem;
+    color: var(--muted-text);
+    line-height: 1.75;
+}
+
+/* =========== RESPONSIVE =========== */
+@media (max-width: 1024px) {
+    .edu-process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .edu-tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .edu-process-grid,
+    .formats-grid,
+    .curriculum-grid,
+    .edu-tools-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-outcomes-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}

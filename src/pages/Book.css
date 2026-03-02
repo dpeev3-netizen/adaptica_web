@@ -1,0 +1,539 @@
+/* ============ BOOKING PAGE ============ */
+.book-page {
+    min-height: calc(100vh - 64px);
+    padding: 6rem 0 4rem;
+}
+
+/* ============ STEP INDICATOR ============ */
+.book-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3.5rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.book-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.35;
+    transition: opacity 0.3s ease;
+}
+
+.book-step.active {
+    opacity: 1;
+}
+
+.book-step:disabled {
+    cursor: default;
+}
+
+.book-step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tektur', sans-serif;
+    font-size: 0.9rem;
+    background: var(--card-bg);
+    color: var(--muted-text);
+    box-shadow: var(--inset-shadow);
+    transition: all 0.3s ease;
+}
+
+.book-step.active .book-step-num {
+    background: var(--primary-accent);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+}
+
+.book-step.current .book-step-num {
+    transform: scale(1.1);
+}
+
+.book-step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-text);
+}
+
+.book-step.active .book-step-label {
+    color: var(--dark-text);
+}
+
+.book-step-line {
+    flex: 1;
+    height: 2px;
+    min-width: 50px;
+    background: var(--subtle-border);
+    margin: 0 0.75rem;
+    margin-bottom: 1.6rem;
+    border-radius: 2px;
+    transition: background 0.4s ease;
+}
+
+.book-step-line.filled {
+    background: var(--primary-accent);
+}
+
+/* ============ CONTENT ============ */
+.book-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Step entrance animation (not dependent on IntersectionObserver) */
+.book-step-enter {
+    animation: bookStepFadeIn 0.45s ease both;
+}
+
+@keyframes bookStepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book-step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    color: var(--primary-accent);
+}
+
+.book-step-header h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 0.3rem;
+}
+
+.book-step-header p {
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    line-height: 1.6;
+}
+
+/* ============ CALENDAR ============ */
+.book-calendar {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+}
+
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+}
+
+.cal-title {
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+}
+
+.cal-nav {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card-bg);
+    box-shadow: var(--inset-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--dark-text);
+    transition: all 0.15s ease;
+}
+
+.cal-nav:hover:not(:disabled) {
+    box-shadow: var(--card-shadow);
+    transform: translateY(-1px);
+}
+
+.cal-nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-day-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-text);
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+    color: var(--dark-text);
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.cal-cell:hover:not(.disabled):not(.empty) {
+    background: rgba(192, 57, 43, 0.08);
+    transform: scale(1.08);
+}
+
+.cal-cell.empty {
+    cursor: default;
+}
+
+.cal-cell.disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.cal-cell.weekend {
+    color: var(--muted-text);
+}
+
+.cal-cell.today {
+    font-weight: 700;
+    color: var(--primary-accent);
+}
+
+.cal-cell.today::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--primary-accent);
+}
+
+.cal-cell.selected {
+    background: var(--primary-accent) !important;
+    color: #fff !important;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+    transform: scale(1.08);
+}
+
+.cal-cell.selected::after {
+    display: none;
+}
+
+.cal-legend {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--subtle-border);
+}
+
+.cal-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--muted-text);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot.today {
+    background: var(--primary-accent);
+}
+
+.legend-dot.weekend {
+    background: var(--muted-text);
+    opacity: 0.3;
+}
+
+.legend-dot.selected {
+    background: var(--primary-accent);
+    box-shadow: 0 0 6px rgba(192, 57, 43, 0.4);
+}
+
+/* ============ TIME SLOTS ============ */
+.book-time-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.book-time-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 1rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--card-bg);
+    box-shadow: var(--inset-shadow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--dark-text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.book-time-slot:hover {
+    box-shadow: var(--card-shadow);
+    transform: translateY(-2px);
+    color: var(--primary-accent);
+}
+
+.book-time-slot.selected {
+    background: var(--primary-accent);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(192, 57, 43, 0.35);
+    transform: translateY(-2px);
+}
+
+/* ============ FORM ============ */
+.book-summary-bar {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--inset-shadow);
+    margin-bottom: 2rem;
+}
+
+.book-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--primary-accent);
+}
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.book-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.book-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.book-field.full {
+    grid-column: 1 / -1;
+}
+
+.book-field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.book-field input,
+.book-field textarea {
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--subtle-border);
+    background: var(--card-bg);
+    box-shadow: var(--inset-shadow);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.92rem;
+    color: var(--dark-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.book-field input:focus,
+.book-field textarea:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+}
+
+.book-field input.error,
+.book-field textarea.error {
+    border-color: #e74c3c;
+}
+
+.book-error {
+    font-size: 0.72rem;
+    color: #e74c3c;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.book-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.book-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+/* ============ BACK BUTTON ============ */
+.book-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted-text);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    padding: 0.5rem 0;
+}
+
+.book-back:hover {
+    color: var(--primary-accent);
+}
+
+/* ============ SUCCESS ============ */
+.book-success {
+    text-align: center;
+    padding: 6rem 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.book-success-icon {
+    color: #28c940;
+    margin-bottom: 2rem;
+    animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.book-success h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-bottom: 1rem;
+}
+
+.book-success-details {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--primary-accent);
+    margin-bottom: 0.75rem;
+}
+
+.book-success-sub {
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    line-height: 1.7;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .book-page {
+        padding: 4rem 0 3rem;
+    }
+
+    .book-time-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .book-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .book-form-actions {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+
+    .book-form-actions .btn-primary {
+        width: 100%;
+    }
+
+    .book-steps {
+        gap: 0;
+    }
+
+    .book-step-line {
+        min-width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-time-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .book-summary-bar {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .cal-legend {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+}

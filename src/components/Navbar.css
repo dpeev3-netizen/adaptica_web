@@ -1,0 +1,424 @@
+/* =========================================
+   NAVBAR & FULLSCREEN MENU — APPLE NEOMORPHIC
+========================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: background 0.4s ease, padding 0.4s ease;
+}
+
+.navbar.scrolled {
+    padding: 1rem 0;
+    background: rgba(232, 234, 239, 0.85);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.navbar.menu-active {
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* === LOGO === */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+    opacity: 0.7;
+}
+
+.logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* === BURGER TOGGLE — Neomorphic Pill === */
+.menu-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 0 12px;
+    border-radius: 14px;
+    transition: transform 0.3s var(--transition-spring);
+}
+
+/* Neomorphic container when NOT in menu */
+.menu-toggle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: var(--card-bg);
+    box-shadow: 4px 4px 10px rgba(170, 175, 188, 0.5),
+        -4px -4px 10px rgba(255, 255, 255, 0.9);
+    transition: opacity 0.4s ease, box-shadow 0.2s ease;
+}
+
+.menu-toggle:hover::before {
+    box-shadow: 6px 6px 14px rgba(170, 175, 188, 0.6),
+        -6px -6px 14px rgba(255, 255, 255, 1);
+}
+
+.menu-toggle:hover {
+    transform: scale(1.06);
+}
+
+.menu-toggle:active::before {
+    box-shadow: var(--inset-shadow);
+}
+
+/* Hide neomorphic bg when menu is open (dark bg) */
+.navbar.menu-active .menu-toggle::before {
+    opacity: 0;
+}
+
+.menu-toggle .line {
+    display: block;
+    height: 2px;
+    background: var(--dark-text);
+    border-radius: 2px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.menu-toggle .line.top {
+    width: 24px;
+}
+
+.menu-toggle .line.bottom {
+    width: 16px;
+}
+
+.menu-toggle:hover .line.bottom {
+    width: 24px;
+}
+
+/* X state */
+.navbar.menu-active .menu-toggle .line {
+    background: rgba(255, 255, 255, 0.9);
+    width: 24px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+}
+
+.navbar.menu-active .menu-toggle .line.top {
+    transform: rotate(45deg);
+    margin-top: -1px;
+}
+
+.navbar.menu-active .menu-toggle .line.bottom {
+    transform: rotate(-45deg);
+    margin-left: -12px;
+    margin-top: -1px;
+}
+
+/* =========================================
+   FULLSCREEN OVERLAY — Glass Neomorphic
+========================================= */
+.fs-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--dark-bg);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+    overflow-y: auto;
+}
+
+/* Noise texture */
+.fs-menu::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Subtle gradient glow — top-right accent warmth */
+.fs-menu::after {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 57, 43, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fs-menu.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fs-menu-inner {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem 2rem 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* === NAV LINKS === */
+.fs-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+/* === GLASS CARD NAV ITEMS === */
+.fs-nav-item {
+    width: 100%;
+    overflow: hidden;
+    /* Neomorphic Base */
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: var(--radius-md);
+    /* Neomorphic Shadow */
+    box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.45), inset 1px 1px 1px rgba(255, 255, 255, 0.04);
+    /* Stagger entrance */
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transition: opacity 0.45s ease, transform 0.45s var(--transition-spring),
+        background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition-delay: calc(var(--i, 0) * 0.07s + 0.12s);
+}
+
+.fs-menu.open .fs-nav-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.fs-nav-item:hover {
+    border-color: rgba(192, 57, 43, 0.35);
+    /* Elevated Neomorphic Hover with Glow */
+    box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.6),
+        0 0 16px rgba(192, 57, 43, 0.2),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.12),
+        inset 4px 0 0 var(--primary-accent);
+}
+
+.fs-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.1rem 1.5rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Tektur', sans-serif;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+}
+
+.fs-nav-link:hover {
+    color: #fff;
+}
+
+.fs-link-text {
+    position: relative;
+}
+
+/* === SERVICES CHEVRON === */
+.fs-chevron {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.25);
+    transition: transform 0.35s var(--transition-spring), color 0.3s ease;
+    line-height: 1;
+}
+
+.fs-chevron.open {
+    transform: rotate(45deg);
+    color: var(--primary-accent);
+}
+
+/* === SUB MENU === */
+.fs-sub-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+    padding: 0;
+}
+
+.fs-sub-menu.open {
+    max-height: 400px;
+    padding: 0.15rem 0 0.75rem;
+}
+
+.fs-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0.2rem 1rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid transparent;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.fs-sub-link:hover {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.3), inset -1px -1px 2px rgba(255, 255, 255, 0.04);
+}
+
+.fs-sub-link svg {
+    color: var(--primary-accent);
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+.fs-sub-link:hover svg {
+    opacity: 1;
+}
+
+/* === FOOTER === */
+.fs-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: auto;
+    padding-top: 3rem;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.45s ease 0.45s, transform 0.45s ease 0.45s;
+}
+
+.fs-menu.open .fs-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fs-footer-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s ease;
+}
+
+.fs-footer-link:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* === CTA — Neomorphic Accent Button === */
+.fs-cta-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: var(--primary-accent);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 11px 26px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.2s var(--transition-smooth);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5),
+        -2px -2px 6px rgba(255, 120, 100, 0.2),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.fs-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.6),
+        -2px -2px 8px rgba(255, 120, 100, 0.3),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+    background: #d84432;
+    /* Slightly brighter red on hover */
+}
+
+.fs-cta-btn:active {
+    transform: translateY(1px);
+    box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.4),
+        inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+    border-color: transparent;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .fs-menu-inner {
+        padding: 6rem 1.25rem 2rem;
+    }
+
+    .fs-nav-link {
+        font-size: 1.2rem;
+        padding: 1rem 1.25rem;
+    }
+
+    .fs-footer {
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+    }
+
+    .fs-nav {
+        max-width: 100%;
+    }
+}

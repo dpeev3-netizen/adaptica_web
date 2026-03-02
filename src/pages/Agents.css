@@ -1,0 +1,209 @@
+.agents-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.status-pulse {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #28c940;
+    margin-left: 10px;
+    vertical-align: middle;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(40, 201, 64, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(40, 201, 64, 0);
+    }
+}
+
+.big-text {
+    font-size: 1.2rem;
+    line-height: 1.75;
+    font-weight: 500;
+    color: var(--dark-text);
+    margin-bottom: 1.25rem;
+}
+
+/* Chat Demo Mockup */
+.agent-chat-demo {
+    background-color: var(--dark-bg);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--dark-border);
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3), 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.chat-demo-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-demo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #28c940;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.chat-demo-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.04em;
+    flex: 1;
+}
+
+.chat-demo-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    color: #28c940;
+    letter-spacing: 0.04em;
+}
+
+.chat-demo-messages {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 250px;
+}
+
+.chat-msg {
+    display: flex;
+}
+
+.chat-msg-user {
+    justify-content: flex-end;
+}
+
+.chat-msg-agent {
+    justify-content: flex-start;
+}
+
+.chat-bubble {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    padding: 0.6rem 1rem;
+    border-radius: 14px;
+    max-width: 80%;
+}
+
+.chat-msg-user .chat-bubble {
+    background: var(--primary-accent);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-msg-agent .chat-bubble {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom-left-radius: 4px;
+}
+
+.chat-demo-input {
+    padding: 0.7rem 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Use cases (dark) */
+.usecases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.usecase-card {
+    padding: 2.25rem 2rem;
+}
+
+.usecase-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin-bottom: 1.25rem;
+}
+
+.usecase-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+
+.usecase-card p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+}
+
+/* Agent benefits */
+.agent-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+}
+
+.agent-benefit-card {
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.agent-benefit-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--primary-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin: 0 auto 1rem;
+}
+
+.agent-benefit-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.agent-benefit-card p {
+    font-size: 0.88rem;
+    color: var(--muted-text);
+    line-height: 1.65;
+}
+
+@media (max-width: 768px) {
+    .agents-intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .usecases-grid,
+    .agent-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+}

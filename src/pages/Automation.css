@@ -1,0 +1,151 @@
+.auto-intro-content {
+    text-align: center;
+}
+
+/* Flow diagram */
+.auto-flow-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flow-node-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--base-bg);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+}
+
+.flow-node span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted-text);
+    letter-spacing: 0.05em;
+}
+
+.flow-arrow {
+    color: var(--muted-text);
+    opacity: 0.4;
+}
+
+/* Modules */
+.auto-module {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.auto-module:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.auto-module.reverse {
+    direction: rtl;
+}
+
+.auto-module.reverse>* {
+    direction: ltr;
+}
+
+.module-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin-bottom: 1.25rem;
+}
+
+.module-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.module-info p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+}
+
+.module-points {
+    padding: 2rem;
+}
+
+.point-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.point-item:last-child {
+    border-bottom: none;
+}
+
+.point-bullet {
+    color: var(--primary-accent);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* Integration grid */
+.integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.75rem;
+}
+
+.integration-chip {
+    padding: 1rem;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-text);
+    transition: all 0.3s;
+    cursor: default;
+}
+
+.integration-chip:hover {
+    box-shadow: var(--card-shadow);
+    color: var(--dark-text);
+}
+
+@media (max-width: 768px) {
+    .auto-module {
+        grid-template-columns: 1fr;
+    }
+
+    .auto-module.reverse {
+        direction: ltr;
+    }
+
+    .auto-flow-visual {
+        gap: 1rem;
+    }
+}

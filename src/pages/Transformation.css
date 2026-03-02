@@ -1,0 +1,204 @@
+.trans-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.trans-big-number {
+    font-family: 'Tektur', sans-serif;
+    font-size: clamp(5rem, 10vw, 8rem);
+    color: var(--primary-accent);
+    line-height: 1;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.trans-big-sub {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--dark-text);
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+}
+
+.trans-big-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted-text);
+    letter-spacing: 0.06em;
+}
+
+.big-text {
+    font-size: 1.2rem;
+    line-height: 1.75;
+    color: var(--dark-text);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+/* Timeline steps */
+.steps-timeline {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.step-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.step-line-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.step-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-accent);
+    flex-shrink: 0;
+    z-index: 2;
+    box-shadow: 0 0 0 5px rgba(192, 57, 43, 0.15), 0 0 16px rgba(192, 57, 43, 0.25);
+}
+
+.step-connector-line {
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 14px);
+    right: calc(-50% + 14px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-accent), rgba(192, 57, 43, 0.12));
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.step-card {
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+}
+
+.step-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin: 0 auto 1rem;
+}
+
+.step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(240, 240, 244, 0.3);
+    display: block;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.step-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--light-text);
+}
+
+.step-card p {
+    color: var(--muted-dark);
+    line-height: 1.75;
+    font-size: 0.93rem;
+}
+
+/* Benefits */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.benefit-card {
+    padding: 2.25rem 2rem;
+}
+
+.benefit-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--primary-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    margin-bottom: 1.25rem;
+}
+
+.benefit-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+}
+
+.benefit-card p {
+    font-size: 0.92rem;
+    color: var(--muted-text);
+    line-height: 1.75;
+}
+
+/* For who */
+.trans-for-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.trans-for h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+/* FAQ */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* FAQ — uses global .faq-card styles from index.css */
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .trans-stat-grid,
+    .trans-for-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .steps-timeline {
+        flex-direction: column;
+    }
+
+    .step-connector-line {
+        display: none;
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}

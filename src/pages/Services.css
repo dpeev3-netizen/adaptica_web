@@ -1,0 +1,150 @@
+/* Services List */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.25rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    gap: 2rem;
+}
+
+.service-row-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.service-row-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--primary-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-accent);
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+.service-row:hover .service-row-icon {
+    background: var(--primary-accent);
+    color: #fff;
+}
+
+.service-row-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.service-row-header h3 {
+    font-size: 1.2rem;
+}
+
+.service-row p {
+    font-size: 0.92rem;
+    color: var(--muted-text);
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.service-row-arrow {
+    color: var(--primary-accent);
+    opacity: 0.5;
+    transition: transform 0.3s, opacity 0.3s;
+    flex-shrink: 0;
+}
+
+.service-row:hover .service-row-arrow {
+    transform: translateX(6px);
+    opacity: 1;
+}
+
+/* Comparison */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.comparison-title {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.before-title {
+    color: var(--muted-dark);
+}
+
+.after-title {
+    color: #28c940;
+}
+
+.comparison-before ul,
+.comparison-after ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.comparison-before li,
+.comparison-after li {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.comparison-before li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: rgba(192, 57, 43, 0.6);
+    font-size: 0.85rem;
+}
+
+.comparison-after li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #28c940;
+    font-size: 0.85rem;
+}
+
+.comparison-before li {
+    color: rgba(240, 240, 244, 0.35);
+}
+
+.comparison-after li {
+    color: rgba(240, 240, 244, 0.75);
+}
+
+@media (max-width: 768px) {
+    .service-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .service-row-arrow {
+        display: none;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
