@@ -6,6 +6,7 @@ import './Home.css';
 import { Settings, BarChart3, Bot, Zap, GraduationCap, TrendingUp, ArrowRight, Clock, Calendar } from 'lucide-react';
 import AboutPreviewImage from '../assets/about-preview.png';
 import SEOHead, { organizationSchema, localBusinessSchema } from '../components/SEOHead';
+import homepageData from '../content/pages/homepage.json';
 
 import partnerNikolovski from '../assets/partners/68a9a679-7ec1-4de7-87cb-2c08f197de85.png';
 import partnerDavinci from '../assets/partners/e5ffbcbd-2de0-40fa-8965-7fa81f9f08c5.png';
@@ -112,8 +113,8 @@ const Home = () => {
     return (
         <div ref={revealRef}>
             <SEOHead
-                title="AI Агенция България | Adaptica AI — AI Трансформация за Бизнес"
-                description="Adaptica AI е водещата AI агенция в България. AI трансформация, автоматизация на бизнес процеси, AI агенти, AI CRM системи и обучения. Спестете 40+ часа седмично. Безплатна консултация."
+                title={homepageData.metaTitle || "AI Агенция България | Adaptica AI — AI Трансформация за Бизнес"}
+                description={homepageData.metaDescription || "Adaptica AI е водещата AI агенция в България. AI трансформация, автоматизация на бизнес процеси, AI агенти, AI CRM системи и обучения. Спестете 40+ часа седмично. Безплатна консултация."}
                 path="/"
                 jsonLd={[organizationSchema, localBusinessSchema]}
             />
@@ -130,11 +131,12 @@ const Home = () => {
                     <div className="hero-left">
                         <p className="hero-tagline fade-in">Override The Status Quo.</p>
                         <h1 className="hero-h1 fade-in">
-                            Доминирайте следващото<br />
-                            десетилетие <span className="accent">с AI.</span>
+                            {homepageData.heroHeadline.split(' ').map((word, i) => 
+                                word.toLowerCase().includes('ai') ? <span key={i} className="accent">{word} </span> : word + ' '
+                            )}
                         </h1>
                         <p className="hero-sub fade-in">
-                            Adaptica AI е вашият стратегически партньор за AI трансформация. Създаваме интелигентни решения, които спестяват време, увеличават приходите и дават реално конкурентно предимство.
+                            {homepageData.heroSubheadline}
                         </p>
                         <div className="hero-ctas fade-in">
                             <Link to="/book" className="btn-primary">Безплатна Консултация</Link>

@@ -1,0 +1,81 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Meta Title", name: "metaTitle", widget: "string" }
+      - { label: "Meta Description", name: "metaDesc", widget: "text" }
+      - { label: "OG Image", name: "ogImage", widget: "image" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image" }
+      - { label: "Category", name: "category", widget: "string", default: "AI News" }
+      - { label: "Read Time", name: "readTime", widget: "string", default: "5 min read" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "case_studies"
+    label: "Case Studies"
+    folder: "src/content/case-studies"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Client Name", name: "client", widget: "string" }
+      - { label: "Challenge", name: "challenge", widget: "text" }
+      - { label: "Solution", name: "solution", widget: "text" }
+      - { label: "ROI Metrics", name: "roi", widget: "string" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "src/content/pages/homepage.json"
+        fields:
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subheadline", name: "heroSubheadline", widget: "text" }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+          - { label: "Meta Title", name: "metaTitle", widget: "string" }
+          - { label: "Meta Description", name: "metaDescription", widget: "text" }
+
+      - name: "services"
+        label: "Services Page"
+        file: "src/content/pages/services.json"
+        fields:
+          - { label: "Main Headline", name: "headline", widget: "string" }
+          - name: "servicesList"
+            label: "Services List"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Icon Name", name: "icon", widget: "string" }
+          - { label: "Meta Title", name: "metaTitle", widget: "string" }
+          - { label: "Meta Description", name: "metaDescription", widget: "text" }
+
+  - name: "settings"
+    label: "Global Settings"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "global"
+        label: "Global SEO & Site Settings"
+        file: "src/content/settings/global.json"
+        fields:
+          - { label: "Default Site Name", name: "siteName", widget: "string" }
+          - { label: "Default OG Image", name: "defaultOgImage", widget: "image" }
+          - { label: "Global Meta Description", name: "globalMetaDescription", widget: "text" }

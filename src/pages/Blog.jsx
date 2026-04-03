@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { blogPosts } from '../data/blogPosts';
-import { ArrowRight, Clock, Calendar } from 'lucide-react';
-import './Blog.css';
 import SEOHead from '../components/SEOHead';
+import { loadCollection } from '../utils/contentLoader';
+
+const mdModules = import.meta.glob('../content/blog/*.md', { query: '?raw', eager: true });
+const cmsPosts = loadCollection(mdModules);
 
 const Blog = () => {
     const ref = useScrollReveal();
     const [activeCategory, setActiveCategory] = useState('Всички');
 
-    const categories = ['Всички', ...new Set(blogPosts.map(p => p.category))];
-    const filtered = activeCategory === 'Всички' ? blogPosts : blogPosts.filter(p => p.category === activeCategory);
-    const featured = blogPosts.filter(p => p.featured);
+    const allPosts = [...cmsPosts, ...blogPosts.filter(p => !cmsPosts.find(cp => cp.slug === p.slug))];
+    const categories = ['Всички', ...new Set(allPosts.map(p => p.category))];
+    const filtered = activeCategory === 'Всички' ? allPosts : allPosts.filter(p => p.category === activeCategory);
+    const featured = allPosts.filter(p => p.featured);
 
     return (
         <div ref={ref}>

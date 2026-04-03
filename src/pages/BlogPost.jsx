@@ -1,15 +1,17 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useScrollReveal } from '../hooks/useScrollReveal';
-import { blogPosts } from '../data/blogPosts';
-import { ArrowLeft, Clock, Calendar, ArrowRight, Share2 } from 'lucide-react';
-import './Blog.css';
 import SEOHead from '../components/SEOHead';
+import ReactMarkdown from 'react-markdown';
+import { loadCollection } from '../utils/contentLoader';
+
+const mdModules = import.meta.glob('../content/blog/*.md', { query: '?raw', eager: true });
+const cmsPosts = loadCollection(mdModules);
 
 const BlogPost = () => {
-    const { slug } = useParams();
+    const slug = useParams().slug;
     const ref = useScrollReveal();
-    const post = blogPosts.find(p => p.slug === slug);
+    
+    // Combine CMS posts and existing posts
+    const allPosts = [...cmsPosts, ...blogPosts.filter(p => !cmsPosts.find(cp => cp.slug === p.slug))];
+    const post = allPosts.find(p => p.slug === slug);
 
     if (!post) {
         return (
@@ -23,10 +25,8 @@ const BlogPost = () => {
     }
 
     // Get related posts (same category, excluding current)
-    const related = blogPosts.filter(p => p.category === post.category && p.slug !== post.slug).slice(0, 2);
+    const related = allPosts.filter(p => p.category === post.category && p.slug !== post.slug).slice(0, 2);
 
-    // Parse content into paragraphs
-    const paragraphs = post.content.trim().split('\n').filter(line => line.trim());
 
     const handleShare = async () => {
         try {
@@ -89,23 +89,21 @@ const BlogPost = () => {
             <section className="blogpost-content section-padding">
                 <div className="container">
                     <article className="blogpost-body fade-in">
-                        {post.image && (
+                        {(post.image || post.featuredImage) && (
                             <img
-                                src={post.image}
+                                src={post.image || post.featuredImage}
                                 alt={post.title}
                                 style={{ width: '100%', borderRadius: 'var(--radius-lg)', marginBottom: '3rem', boxShadow: 'var(--card-shadow)' }}
                             />
                         )}
-                        {paragraphs.map((para, i) => {
-                            const trimmed = para.trim();
-                            if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
-                                return <h2 key={i}>{trimmed.replace(/\*\*/g, '')}</h2>;
-                            }
-                            if (/^\d+\./.test(trimmed)) {
-                                return <p key={i} className="blogpost-list-item">{trimmed}</p>;
-                            }
-                            return <p key={i}>{trimmed.replace(/\*\*/g, '')}</p>;
-                        })}
+                        
+                        <div className="markdown-content">
+                            {post.content && typeof post.content === 'string' ? (
+                                <ReactMarkdown>{post.content}</ReactMarkdown>
+                            ) : (
+                                <p>{post.content}</p>
+                            )}
+                        </div>
 
                         <div className="blog-share-container fade-in delay-2">
                             <button className="blog-share-btn" onClick={handleShare}>

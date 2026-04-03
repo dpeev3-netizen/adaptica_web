@@ -4,23 +4,29 @@ import { useEffect } from 'react';
  * SEOHead — Dynamic per-page SEO metadata and JSON-LD structured data.
  * Updates document.title, meta description, canonical URL, and injects JSON-LD schemas.
  */
+import globalSettings from '../content/settings/global.json';
+
 const SEOHead = ({ title, description, path = '/', jsonLd = [], image }) => {
+    const finalTitle = title || globalSettings.siteName;
+    const finalDescription = description || globalSettings.globalMetaDescription;
+    const finalImage = image || globalSettings.defaultOgImage;
+
     useEffect(() => {
         // Update title
-        document.title = title;
+        document.title = finalTitle;
 
         // Update meta description
         let metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) {
-            metaDesc.setAttribute('content', description);
+            metaDesc.setAttribute('content', finalDescription);
         }
 
         // Update OG tags
         let ogTitle = document.querySelector('meta[property="og:title"]');
-        if (ogTitle) ogTitle.setAttribute('content', title);
+        if (ogTitle) ogTitle.setAttribute('content', finalTitle);
 
         let ogDesc = document.querySelector('meta[property="og:description"]');
-        if (ogDesc) ogDesc.setAttribute('content', description);
+        if (ogDesc) ogDesc.setAttribute('content', finalDescription);
 
         let ogUrl = document.querySelector('meta[property="og:url"]');
         if (!ogUrl) {
@@ -30,14 +36,14 @@ const SEOHead = ({ title, description, path = '/', jsonLd = [], image }) => {
         }
         ogUrl.setAttribute('content', `https://adaptica.ai${path}`);
 
-        if (image) {
+        if (finalImage) {
             let ogImage = document.querySelector('meta[property="og:image"]');
             if (!ogImage) {
                 ogImage = document.createElement('meta');
                 ogImage.setAttribute('property', 'og:image');
                 document.head.appendChild(ogImage);
             }
-            ogImage.setAttribute('content', `https://adaptica.ai${image}`);
+            ogImage.setAttribute('content', `https://adaptica.ai${finalImage}`);
         }
 
         // Update canonical
@@ -71,7 +77,7 @@ const SEOHead = ({ title, description, path = '/', jsonLd = [], image }) => {
                 if (el) el.remove();
             });
         };
-    }, [title, description, path, jsonLd, image]);
+    }, [finalTitle, finalDescription, path, jsonLd, finalImage]);
 
     return null;
 };
